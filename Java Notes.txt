@@ -1,0 +1,466 @@
+Instance initialiser Block runs after super() and before Constructor, this is since the code gets copied into constructor first line.
+
+Uninitialised final methods become final after they are given first value(but only in constructor).
+
+static block is initialised when the class is first evoked in the memory and is used to initialise static valiables.
+
+static final variables : if initialised can only be changed in a static block
+
+Runtime polymorphism or Dynamic Method Dispatch is a process in which a call to an overridden method is resolved at runtime rather than compile-time.
+
+Upcasting is when a child object is stored in parent class object.
+
+When type of the object is determined at compiled time(by the compiler), it is known as static binding.
+If there is any private, final or static method in a class, there is static binding.
+
+Abstract class can have main class also
+
+An interface in Java is a blueprint of a class. It has static constants and abstract methods.
+
+Since Java 8, we can have default and static methods in an interface in which body can be defined.
+
+Since Java 9, we can have private methods in an interface.
+
+Interface fields are public, static and final by default while methods are public abstract by default.
+
+WHY NO AMBIGUITY ISSUE IN INTERFACES ???
+
+interface Printable
+{
+    void print();  // ==> this is not defined
+}
+
+interface Showable
+{
+    void print();  // ==> this is not defined
+}
+
+class TestInterface3 implements Printable, Showable{
+public void print(){System.out.println("Hello");}   //==> Defining interface method meaning
+public static void main(String args[]){
+TestInterface3 obj = new TestInterface3();
+obj.print();
+}
+}
+
+In the above even though there were 2 print() methods, it does not matter since they are not defined and for use they must be defiend first and
+after defining , it does not matter which print() was defined, and THERE ARE NO 2 DIFFERNET print() WITH DIFFERENT DEFINITION.
+
+An interface which has no member is known as a marker or tagged interface, for example, Serializable
+
+> interface extends other interface
+
+Java supports the feature of an anonymous array, so you don't need to declare the array while passing an array to the method.
+eg. printArray(new int[]{10,22,44,66})
+
+copy an array to another by the arraycopy() method of System class.
+System.arraycopy( arr copyFrom, int fromIndex, arr copyTo, int recieverindex, int length or number of element to be copied)
+
+> CLONING :
+
+The java.lang.Cloneable interface must be implemented by the class whose object clone we want to create. If we don't implement
+Cloneable interface, clone() method generates CloneNotSupportedException.
+
+intersting observations is that clone() method is actually present in Object class, But the class to be clone must extend Clonable interface
+Clonable interface is a marker interface.
+for using clone() method, we must define it in the class that extended clonable like :
+public Object clone()throws CloneNotSupportedException
+{
+    return super.clone();
+}
+
+> strictfp :
+Java strictfp keyword ensures that you will get the same result on every platform if you perform operations in the floating-point variable.
+The strictfp keyword can be applied on methods, classes and interfaces.
+The strictfp keyword cannot be applied on abstract methods, variables or constructors.
+
+java doc : /**... */
+javadoc M.java will generate document api.
+
+> what is String [] args ??? => COMMAND LINE ARGUMENT STRING !!!!
+when we run java bytecode like: >java Preetam, suppose we pass a string after eg :
+                                                  >javac Preetam.java
+                                                  >java Preetam hello this is argument
+then args = {"hello","this","is","argument"}
+and the argument passed can be accessed using indices with args eg. args[0] = "hello".
+its use is still a question though
+
+> Static methods in Java are inherited, but can not be overridden.
+If you declare the same method in a subclass, you hide the superclass method instead of overriding it.
+hence when making a method with same name as parent static method, you are actually making a fresh method in current class.
+
+> There are two types of type casting:
+Widening Type Casting
+Narrowing Type Casting
+
+NOTE: since in going from smaller size to bigger size does not lead to data loss, it is done automatically(implicit) and since
+going from bigger to smaller size can lead to data loss(eg. float to int) hence this conversion needs to be done by explicitly.
+
+Implicit Conversion happesn when :
+Both data types must be compatible with each other.
+The target type must be larger than the source type.
+
+ > The java.lang.String class implements Serializable, Comparable and CharSequence interfaces.
+
+> String pooling using STRING LITERAL string initialistion :
+    when we make string in java like : String st = "preetam". the compiler will search for "preetam" in the string constant pool(in heap) and if it exists,
+    st points to the same pool :
+    eg. String pt = "Preetam",st = "Preetam"; here st and pt are reference to same string.
+    this pool is a region in heap where the string with many reference are stored for data optimisation.
+
+Using new keyword :
+    using new keyword to make string, will give new memory to the new string outside of string pool.
+
+now strings in java are immutable since in the pool, if many strings were pooling to same string, and we changed it, this will cause the string value change for all the strings, to avoid this strings are immutable. we can completely chage the value of a string and thsi will not affect the old string pool but a new string will be made in the pool.
+
+> Comparing Strings :
+
+public boolean equals(Object another) compares this string to the specified object.
+public boolean equalsIgnoreCase(String another) compares this string to another string, ignoring case.
+
+The == operator compares references not values. i.e. if the strings are pointing to same string in string pool.
+
+compareTo() method returns 0,1 or -1 based on the strings being equal, one greater than other and smaller than other respectively in
+lexicographical manner.(Dictionary Manner)
+
+> Concatinate Strings :
+    strings instanciated using new keyword (outside of the string constant pool) can be appended using append() method.
+    while in string pool instanciation, concat is used and new assignmnet is done.
+
+> Substring :
+    public String substring(int startIndex, int endIndex):
+        startIndex: inclusive
+        endIndex: exclusive
+
+> Other string methods :
+    toUpperCase()
+    s.trim() --> removes spaces from end and begining
+    s.startsWith("Sa") --> returns boolean based on true or false
+    s.endsWith("n") --> returns boolean
+    intern() -->
+                String s = new String("Sachin");
+                String s2 = s.intern();
+                in the above, if the string pool contains string s, the string is returned and stored in s2 . Else if string is not contained in pool,
+                string is saved in pool and the reference to the string is returned and stored in s2.
+
+    String st = String.valueOf(10) --> valueOf() is a static method which returns the number in string form(like the toString method defined in object class)
+    st.replace(str1,str2) ==> replaces all instance of str1 with str 2 in a string and return the modified string.
+
+> StringBuffer class
+    Java StringBuffer class is used to create mutable (modifiable) String objects
+    StringBuffer class object made without specifyinig size is of size 16 by default
+    this is synchronised i.e. threads can utilise and only one theread can access at a time.
+    it has methods like :
+      append()
+      insert()
+      replace()
+      delete()
+      reverse()
+      capacity()
+      length()
+      substring()
+
+> The Java StringBuilder
+      is same as StringBuffer class except that it is non-synchronized
+      i.e Threads cannot utilise as they can call this simultaneously(which is against critical section)
+
+> toString() method is called when we just write the object name.(the compiler will replace object name with obj.toString())
+    eg.  Student s1=new Student(101,"Raj","lucknow");
+         System.out.println(s1);//compiler writes here s1.toString()
+         // in the above, toString() method which is overwritten in Student class from Object class will be called.
+
+    use of toString() - toString should be defined in the class so that to string returns the string equavalent of variable in the class.
+
+NOTE : Interger.toString(n) : here in wrapper class Integer, the toString method has been overwritten and overloaded in a way that any number passed, will be
+       returned in string form.
+
+> java.util.StringTokenizer : class allows you to break a string into tokens. It is simple way to break string.
+
+Public method	:                 Description
+boolean hasMoreTokens() 	      checks if there is more tokens available.
+String nextToken()	            returns the next token from the StringTokenizer object.
+String nextToken(String delim)	returns the next token based on the delimeter.
+boolean hasMoreElements()	      same as hasMoreTokens() method.
+Object nextElement()	          same as nextToken() but its return type is Object.
+int countTokens()	              returns the total number of tokens.
+
+in this delimeter is the substring based on which the string will be divided into token.
+delimeter can be passed along with the string in the constructor or can be passed in nextToken() also.
+
+NOTE : String class is final
+
+> Difference between Checked and Unchecked Exceptions
+    1) Checked Exception(compile time checked)
+    The classes which directly inherit Throwable class except RuntimeException and Error are known as checked exceptions e.g. IOException, SQLException etc.
+    Checked exceptions are checked at compile-time.
+
+    2) Unchecked Exception(runtime checked )
+    The classes which inherit RuntimeException are known as unchecked exceptions e.g. ArithmeticException, NullPointerException, ArrayIndexOutOfBoundsException etc.
+    Unchecked exceptions are not checked at compile-time, but they are checked at runtime.
+
+    3) Error
+    Error is irrecoverable e.g. OutOfMemoryError, VirtualMachineError, AssertionError etc.
+
+    The Java throw keyword is used to explicitly throw an exception.
+    eg.
+        if(age<18)
+        throw new ArithmeticException("not valid");
+
+    The Java throws keyword is used to declare an exception. It gives an information to the programmer that there may occur an exception so it is better for the programmer to provide
+    the exception handling code so that normal flow can be maintained.
+    so if a function has throws Exception in front, its better to handle the exception when calling the function using try catch block.
+
+>  RULES : if superclass method does not throw exception, the child class overwritten method also cannot(but only for checked exception)
+
+            eg. if
+          >  Parent class method()
+            has no exception throws, then
+          >  child method() throws Exception
+           will give error since parent has no exception throws.
+
+            if superclass method declares throws E, the child class overwritten method can declare same, exception child or no exception but not the parent exception of exception E.
+            (eg. parent of NullPointerException is Exception)
+
+                eg. if parent
+                > class method() throws ArithmeticException
+                then, child
+                > class method() throws Exception
+                will throw error since Exception is parent of ArithmeticException
+
+> Own exception : if we create our own exception class it has to extend Exception class. this also needs if else conditions to work.
+                  our own exception must have a constructor with a string paramenter and pass it to super :
+                  public class OwnException extends Exception
+                  {
+                      public OwnException(String str)
+                      {
+                        super(str);
+                      }
+                  }
+                      since Exception constructor takes a string as argument and prints the string in the exception message.
+
+                  after declaring out own exception, we must throw our own exception using if else
+                  eg :
+                  void validate(int age)throws InvalidAgeException
+                  {
+                    if(age<18)
+                      throw new InvalidAgeException("not valid");
+                    else
+                      System.out.println("welcome to vote");
+                  }
+
+>> JAVA inner Classes :
+    Inner classes can access all the members of outer class including private data members and methods.
+    types of nested class :
+    Non-static nested class (inner class)
+        Member inner class
+        Anonymous inner class
+        Local inner class
+    Static nested class
+
+    Type	                     Description
+
+    Member Inner Class	       A class created within class and outside method.
+    Anonymous Inner Class	     A class created for implementing interface or extending class. Its name is decided by the java compiler.
+    Local Inner Class	         A class created within method.
+    Static Nested Class	       A static class created within class.
+    Nested Interface	         An interface created within class or interface.
+
+    Member inner class :
+        a simple inner class that is in scope of the class member.
+        eg :
+        Outer obj = new Outer();
+        Outer.Inner in = obj.new Inner();
+
+        compiler treats inner class very differently hence inspite of the inner class being non static, we can access using membership operator.
+        the file cnd class name is changed to Outer$Inner
+
+    Anonymous Class :
+        Java Anonymous inner class is used to create an unnamed child class for an Interace or class and override a method.
+        the anonymous class can override multiple of methods and even inherits variables of parent.
+        it can also be used to to override interface method without actually making a class.
+        NOTE : cannot declare independent methods and can only be used for overriding.
+              since if we make anonymous class of Class1, the object type is Class1 and holds reference to Class1 object and since the method defined in
+              anonymous class is not present in Class1 it cannot be accessed using object made.
+
+        in case of an interface, we can even override default methods.
+        upon compiling , java makes a class file giving it a name .
+
+    Local Inner class :
+        local inner class are class made inside of methods and are limited to scope of the method.
+        Since JDK 1.8, it is possible to access the non-final local variable in local inner class.
+
+
+    STATIC Inner class :
+        It cannot access non-static data members and methods. It can be accessed by outer class name.
+        Outer.Inner obj = new Outer.Inner();
+        or
+        Outer.Inner.msg();
+
+    Nested Interfaces :
+        an interface within an interface is known as nested interface.
+
+        interface Showable
+        {
+          void show();
+          interface Message
+          {
+            void msg();
+          }
+        }
+
+        class can implement inner interface using : class CLass1 implments Showable.Message
+
+        we can even define interface inside a class.
+        The nested interfaces are used to group related interfaces so that they can be easy to maintain.
+
+        class A
+        {
+        interface Message
+          {
+            void msg();
+          }
+        }
+
+        a class can implement by saying : public class CLass1 implements A.Message
+
+        we can even define a class inside an interface
+
+NOTE : inner class and interface for a class can be accessed using class name and . interface.
+
+        Look at this : nested interfaces and anonymous class at the same time
+interface OuterInterface
+{
+interface InnerInterface
+{
+    public void print();
+}
+}
+
+class Preetam
+{
+public static void main(String[] args)
+{
+   OuterInterface.InnerInterface obj = new OuterInterface.InnerInterface()
+   {
+       public void print()
+       {
+           System.out.println("Preetam Singh");
+       }
+   };
+   obj.print();
+}
+}
+
+NOTE : interfaces dont have Constructors, but while defining the anonymolus class we write Interface() but thats not actually calling constructor.
+
+  > Method overriding and Access Modifiers.
+       while method overriding, child class method cannot have a lower level access modifier than the parent class method. eg.
+       a protected instance method in the super-class can be made public, but not private, in the subclass. Doing so, will generate
+       compile-time error.
+       sequence : Private > Protected > Default > Public (parent > child)
+
+>> MULTITHREADING :
+    > Multithreading in Java is a process of executing multiple threads simultaneously.
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>      NOTES :
+            
+
+
+this() : to invoke current class constructor
+
+Whenever you create the instance of subclass, an instance of parent class is created implicitly which is referred by super reference variable.
+
+super() is added in each class constructor automatically by compiler if there is no super() or this().
+super() is used to use the parent class constructor for initialisation of elements that are defined in parent class and inherited in child class.
+
+
+THREADS :   
+in java threads : runnable interface is functional interface and hence has only one method i.e. run() method hence we make a thread and pass the object of class implementing the runnable interface in order to call the start() mehtod.
+
+t1.join() method actually will wait for execution of thread t1 before any other threads can run(i.e. preventing multithreading  in a way)
+
+public synchronised void mehtod() : this mehtod is synchronised and is thread safe, that means that this method can only be accessed by a single thread at a time.
+
+Thread.sleep(<time in ms>); will actually hault the current thread for the given amount of time.
+
+
+
+
+
+
+EXTRA OOPSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS :
+
+>>> ASSOCIATION :  is the realtionship between elements eg. one to one, many to many, one to many.(eg. Is a and Has a)
+                    eg. car HAS A engine and car IS A vehicle
+
+>> INHERITANCE(is a relationship) : we know about already. is a part of Association.
+
+>> AGGRIGATION(has a relationship ) : is a special case of has a relationship, where the element that HAS A something can exist without that something even if it dosent exist.
+                eg. a car has a music player. but a car can survive without a music player.
+
+>> COMPOSITION(has a relationship ) : is a special case of has a relationhip, where the element that Has A something, cannot exist without that something.
+                eg. a car has a Enging, but a car cannot exist without that engine.
+
+                AGGRIGATION AND COMPOSITION ONLY DIFFER IN WEIGHT OF RELATIONSHIP.
+
+                let me be more precise, 
+
+                Suppose we have a Car class, and car class has two objects of seperate class, say Engine and Radio, Now in main class we make object of Car class.
+                we again make object of radio class in main class and place it in car, NOtice that even after setting the Car object to NULL, we can access the radio object since we made it inside main class.
+
+                Suppose we made the object of engine class inside of Car class only, hence setting car object to null, engine object is also lost. 
+
+                Car had Aggrigation with radio and Composition with engine.
+                We make objects inside class FINAL to achieve composition, so as to avoid aggrigation and achieve composition.
+
+                COMPOSITION is, more like IS A  than HAS A . LUL.
+
+                also note, how engine cannot exist outside of car class, while the radio object can survive in other classes, even with a different reference name.
+
+                COMPOSITION : private final Engine ENGINE1;
+                              private int Radio radio1;  
+
+
+
+
+
+
+> Coupling in java : use of private , public and protected in order to set which class knows about which.
+    we say two classes are tightly coupled when they know alot about each other.
+
+    class Subject {
+        Topic t = new Topic();
+        public void startReading()
+        {
+             t.understand();
+        }
+    }
+    class Topic {
+    public void understand()
+        {
+        System.out.println("Tight coupling concept");
+        }
+    }
+
+    in the above subject and topic are strongly coupled, since changing topic will impact subject.
+
+    its necesarry that classes are loosely coupled so that they are independant and changing one does not affect other.
+
+    we achieve loose coupling using Interfaces, the Interface can call any child and the child are indepandant to each other and are loosely coupled.
+
+> Cohession : it is the preciseness, ie. how specific a module is, eg. io package is highly cohessive since it is associated with  io specific tasks only, whereas util is low cohessive since its functionality is pretty mixed up. Its cool to divide different functionality among different components(eg. add in one function and multiply in another.)
+
+so low coupling and high cohession is recomended.
+

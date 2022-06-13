@@ -1,0 +1,343 @@
+ HOW TO SET THE DEFAULT JAVA VERSION using cmd:
+
+
+
+
+The Storage classes :
+https://www.geeksforgeeks.org/storage-classes-in-c-with-examples/
+article on geeks for geeksforgeeks
+
+C++ uses 5 storage classes, namely:
+
+auto
+register
+extern
+static
+mutable
+
+>> java ,C , C++ follow level 2 grammar(Context Free Grammar) which shows why syntax of c c++ and java is somewhat similar.
+    there are 0 to 3 levels
+        Level 0 - formative grammer;
+        level 1 - context sensetive grammer;
+        level 2 - context free grammer;(the source code is platform independent)
+        level 3 - regular grammer;
+
+The storage class determines the part of memory where storage is allocated for an object (particularly variables and functions)
+and how long the storage allocation continues to exist.
+Reigsters are interesting since if registers are free the variable will be given to the register otherwise in the normal memory, and also note
+we cannot make pointer to a register storage class and get the memory address.
+
+1.)Access Modifiers :
+    > a class can be package or public
+    > NOTE : an inner class can be private public package or protected, hence the class in global scope can only be public or package whereas any other
+      scope, class can take any access modifier.
+    > Static is for removing the object dependancy from a class member.Hence we can call a static member using the class name.
+
+2.) OOPS :
+    > CLASS
+    > Object/Instance variables
+    > Attributes/MemberVariables
+    > Data hiding
+    > Member function/methods
+    > Data Abstraction
+    > Access specifier
+    > Polymorphism
+    > Inheritance
+
+3.) Constructor :
+    > in java 2 types of constructors : default and parameterised
+    > in C++ 3 types : default , parameterised and copy constructor.
+    > A constructor is a special member function or methods used to instanciate or initialise ethe objects , the return type of constructors
+      is nothing.
+    > at the time of calling constructor memory for the object is allocated
+
+4.) Setters and Getters :
+    > setters also called Mutator are used to access and set value of private data members.
+    > getters also called Accessor are used to access and fetch the value of a private data member.
+
+5.) Data Hiding vs Abstraction vs Encapsulation
+    > making data private is data hiding
+    > Data apstraction is binding private data using functions that can get or set the private data.
+    > Encapsulation is Data hiding + Abstraction
+    > Hence the concept of making members private and accessing them using getters and setters is called Encapsulation.
+
+  > qus :
+      > whats your name
+        hello welcome
+        1.) Add Data
+        2.) Display
+        3.) Query
+        4.) Edit
+        5.) Delete
+        6.) Quit
+
+6.) Void Pointer :
+    > void pointer is a generic pointer and it is the only type of pointer we can typecast(i.e. we can change the type of a void prointer using generics)
+    > we cannot do the same with int,float and other type of pointers
+
+7.) Object class :
+    > Object class is parent class of every class .
+    > every class we make will have parent class as parent.
+    > Object class contains a method called toString() and since Object is parent of every class, toString() is inherited by every class.
+    > so when we simply call the object , toString is called. Hence writing object of a class without the membership operator will summon the toString() function.
+    ""
+    class Preetam
+    {
+        private int p = 12;
+        private String st = " Preetam";
+        public String toString()
+        {
+            return(p+st);
+        }
+    }
+    class TestMain
+    {
+        public static void main(String[] args)
+        {
+          Simran blitz = new Simran();
+          System.out.println(blitz);
+        }
+    }
+    ""
+    output : 12 Preetam.
+
+8.) Inheritance in java
+    > it is a procedure, in which one class aquires all fields, properties of parent class.
+    > The main reason behind inheritance is that you can create new classes that are built on existing classes.
+    > When you inherit from an existing class you can reuse methods and fields of the parent class.
+    > Single Level Inheritance : child- parent relationship
+    > Multilevel Inheritance :
+    > Multiple Inheritnace : one class can inherit multiple classes(is not in java). and hence came interfaces. which help in multiple inheritance
+    > What is ERP.??
+
+9.) this pointer :
+    > when control(microprocessor) is on an object, there is an internal pointer that points to the current object called this pointer.
+    > so in a class, this keyword is a pointer to the same class object.
+    > this pointer refers to the current object
+        > The most common use of this keyowrd is to elemenate the confusion between class members and parameters with the same name.
+
+10.) Declaration vs definition :
+    > Declaration is for the compiler and definition is for JVM
+        > in the statement Simran sim = new Simran(); ==> Simran sim is declaration and new Simran() is definition.
+    > so we have to declare the class in runtime whereas we can define it lateron meaning :
+        suppose class Preetam extends Simran
+                class Preetam extends Blitz
+            Preetam pr; // id valid
+            and we can later declare that, pr = new Simran() of pr = new Blitz();
+            This is one of many functionalities of declaration with parent and definitoin with the child class.
+
+    > Methods in java are virtual by default !(virtual function are those that can be overwritten in the child in C++)
+
+> NOTE : in java unlike c++ private variables are inherited by the child class but, the parent class private members cannot be accessed by the
+         child class.
+
+11.) Super :
+    > super is keyword
+    > Constructor are not inherited in java and hence we use super to call the parent class constructor.
+    > just call super(parent constructor arguments);
+    > Study Void pointer/Null pointer/ Wild pointer/ Dangling pointer/ Dangling memory/ NULL.
+
+12.) BOOKS :
+    > C - Dennis Ritchie book/ Bala Goswami.
+    > Java - SunMicrosystems.
+
+13.) ArrayList
+    > ArrayList<type_name> obj = new ArrayList<String>();
+    > functions >add(element_name), clear(), size(), set(index, element_name)
+    > type_name is not premitive data type but the classes, eg for int we have to write Interger
+
+14.) instanceof keyword
+    > instanceof is used to check if an object is instance of a class
+    > eg. (obj instanceof class) will return true and false.
+    >
+
+15.) To Study :
+    > Logical,Relative and Physical address(Study in Compiler design and OS)
+    > Study Serialisation, Sycnchronisation
+
+16.) Boxing and unboxing
+    > the automatic conversion of an premetive variable to an object is called autoboxing and the conversion of an object to premitive variable is called unboxing.
+    >
+
+17.) UML Diagram ??
+    > representing the requirement of the program
+
+18.) project work :
+    > give fixed id password.
+    > sc.next().CharAt(0); for the feature of pausing
+    > for id use random number
+        > java.lang.Math; >> float >> Math.random();
+
+19.) Polymorphism : (meaning many forms)
+    > function overloading
+    > operator overloading ==> not supported in java ;)
+    > function overriding
+    > method overriding
+    > It is possible to override a function or member defined in parent class in the child class.
+    > this is actully like, scope of function in parent class ends with the newly defined function with same name in the child.(like we studied for variable scopes.)
+    > when overriding we use, decorators eg. @override
+    > in using frameworks we need to use decorators(annontations) often.
+
+20. ) NOTE : we can store address of a child class in object of parent class but to use the members of child class the object has to be type converted.
+
+> System programming vs Application programming
+
+21.) Abstraction :
+    > Abstraction is the process of hiding implimentation details and showing only functionality to the user or we can say it shows only essential things to the user
+    > Abstract Class :
+        > in abstract class we can define any Methods and not define some functions that will be defined in the child class.
+        > 0 to 100 percent abstraction
+        > But we cannot do multiple inheritance
+        > we cannot make object of abstract classes
+        > Abstract class must be declared with abstract keyword
+        > It can have abstract and non abstract methods
+        > Abstract class cannot be instanciated
+        > abstract class can have constructor and static methods also.
+        > but we can only call the constructor using the child class only!!
+        > Hence we can only call the constructor using the super keyword.
+        > NOTE : we cannot make object like Student st = new Student(); but we can write Student st; but Student st will not have the memory allocated and willl hold NULL since
+          constructor is not called.
+
+>> double vs Double :
+    > Double d ; ==> will hold Null
+    > double d ; ==> 0.0
+    > this is because Double is a class and a class not given memory using new keyword will hold null. since its not getting initial state.
+
+>> Procedural vs Object ORiented programming :
+    > in procedural programming we focus on the procedure of how the process is done(So we need to keep track of the resources and the code procedure) - System Programming
+    > in Object oriented programming we just want the work done and dont focus on the procedure and the resources - Application Programming.
+
+>> address vs reference :
+    > address keeps the address info
+    > reference keep the address info along with type info.
+
+>> String and String Pooling :
+    > String st = "Simran";
+      String m = st;
+      in  the above case the m and st will hold the memory of the same address and hence this will be a shallow copy;
+      This is called String Pooling.
+      we can make seperate objects to allocates seperate meomory.
+
+22.) final :
+    > we cannot change the value of a final variable(integer or numbers) and final methods cannot be overwritten in child class.
+    > final variables are all in caps.(common convention)
+
+23.) CallBacks :
+    > when library accesses the data that we have defined.
+
+24.) Interface :
+    > Pure abstract classes
+    > used for multiple inheritance.
+    > We can have default static and private methods in an interface
+    > Reasons to use interfaces :
+        > It is used to achieve abstraction(Data hiding and Encapsulation).
+        > By interface we can support the functionality of multiple inheritance.
+        > Can be used to achieve loose Coupling.
+    > declared using interface keyword, it provides total abstraction means, all the methods in an interface ate declared with empty body.
+      or we can say all the methods are abstract by default.
+    > all the fields are public static final and default, we can use these as access modifies.
+    > a class that implements an interface must impliment all the methods declared in the interface.
+    > NOTE : INTERFACE CAN BE USED IN THE CASE WHERE WE CAN USE THE OBJECT OF INTERFACE TO ACCEPT THE REFERENCE OF ANY OF ITS CHILD. VERY USEFUL(remember the
+        pen, pencil and kit eg.) This is called Generalisation.
+    > Interfaces do not have constructors, but abstract classes can have constructors
+    > also note that extends and Implements can work on the same class. EPICCC
+    > in interface all methods are public by default
+    > actually singleton interfaces(having one abst. method) support use of anonymous class for onetime use.
+      and lambda expression can be used to define the logic. ()->
+    > Interfaces types :
+        > Normal Interface(any no. of abs. methods)
+        > Marker Interface(No Method empty)
+        > Single Abst. Method interface (Sam) also called Funtional Interface(Having a single abst. method)
+    > Interface can have defined method in above 1.7 by using the default keyword which can be overrideen in child.
+    > Even if a default method is present with a single abst. method in an interface, the interface is still functional interface and can have anonymous
+      class or lambda expression.
+
+    >> ABBIGUITY ISSUE IN INTERFACES :
+        Default methods have caused ambiguity issue.
+        suppose a class inheriting from two interface and both the interfaces have a default mehod with same name. upon calling the method, there will be error called as
+        Ambiguity issue. How to resolve it ? either we can create our own method inside of the common child which will override the interface methods removing the
+        ambiguity. or we can use super to call the particular interface defined default method.
+        <interface_name>.super.<method_name>
+        this is how ambiguity is resolved in multiple inheritance using interface in java.
+
+    > in interfaces we can make variables but !!! they are by default final or we can say they have final in front of them even if we dont write it
+    > Also we can make static mehtod in interfaces and static methods will be default by default. so we can call method by the interface name.
+
+>>> Study ERP Solutionss !!!!!
+
+25.) Swing ==>>
+    > moving from console view(Charecter UI) to GUI(Graphic User Interface)
+    > javax.swing.*;
+    > every component has prefix J eg. JFrame,JPanel, JButton
+    > JFrame gives the window base :
+        > setSize(x,y); setVisible(true);add(name_of_pannel_object);
+        > we can make our own frame class and extend JFrame
+    > JPanel  sets a panel :
+        > setBackground(Color.GRAY);
+        > there are various types of layouts
+            > Flow Layout : if we dont give a layout the default is FlowLayout
+            > Border Layout : we give the position using north south east and west, also center takes up all the remaining space.
+            > GridLayout : in this the panel is divided into various grids and we can give the number of rows and columns; this.setLayout(new GridLayout(Rows,Columns));
+
+    > JButton sets :
+        > clicking a button generates action and those actions are called Action Events and are looked over by ActionListner class(takes priority from OS)
+        > types of button : JButton JRadioButton
+        > ActionListner is an interface which can be used to keep track of button actions.
+>> NOTE : in scanner System.in represents the default input that comes from keyboard.
+
+
+>> Buffered Reader vs Scanner :
+    Scanner has a problem, when we read input using the nextXXXX() method, the \n is ignored and left for the nextLine() and hence a nextXXXX() and nextLine()
+    dont work one after another as now there needs to be extra nextLine() introduced to get that \n first.
+    This happens because parsing is happening inside
+
+    this is not the case in buffered reader, Buffered reader reads the input charecter stream and hence is very useful. and much faster than Scanner.
+
+    Other Differences :
+    BufferedReader is synchronous while Scanner is not. BufferedReader should be used if we are working with multiple threads.
+    BufferedReader has significantly larger buffer memory than Scanner.
+    The Scanner has a little buffer (1KB char buffer) as opposed to the BufferedReader (8KB byte buffer), but it’s more than enough.
+    BufferedReader is a bit faster as compared to scanner because scanner does parsing of input data and BufferedReader simply reads sequence of characters.
+
+26.) Generics in java :
+    > Generics helps remove the need of making seperate code for seperate datatypes.
+    > there are generic classes and generic methods and even interfaces.
+    > generic methods :
+        > we place before the return type <T>
+        > <T> void preetam(T[] arr){}
+        > the above method can accept any value for T.
+    > generic Classes :
+        > we place <T> after the class name
+        > eg class Preetam<T>
+            i can make its objects like :
+            Preetam <int>obj = new Preetam<>();
+
+    > generic class extends another geeric class :
+        > we can say class Preetam <T> extends Singh <T>
+
+    >> we can pass multiple arguments in generic classess.
+
+Bounded Types    >> also we can give a certain conditions on the generic so that we can pass say only Number(boolean, integer, double etc)
+        eg : class Preetam <T extends Numbers>
+            in the above now T can only be integer, double etc.
+            (this is because Number extends all the number type classes.)
+            classes like the Number class are used for making BOUNDED TYPES .
+
+27.) Serialization :
+    > Serialization is the process of converting an object into a bytestream
+        > objective of serialisation is to store an object in persistant memory. and we can even send the butestream to another device.
+        > the extension of offline saved file is .ser generally.
+        > for this the class whose object is to be serialised needs to implment Serializable interface
+        > FileOutPutStream fileOut = new FileOutputStream("<directory and file name>");
+          ObjectOutputStream out = new ObjectOutputStream(fileOut);
+          out.writeObject(user);
+          out.close();
+          fileOut.close();
+
+          FileOutputStream object is made and file directory and name is passed.
+          ObjectOutputStream constructor takes FileOutputStream object.
+          writeObject method in ObjectOutputStream takes serizable object and stores it in a file.
+          now the resources need to be closed.
+
+    > Deserialisation is the process of converting a bytestream into object.
+        > this is just converting the byte stream into object.

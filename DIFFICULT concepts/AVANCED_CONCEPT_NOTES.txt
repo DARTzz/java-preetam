@@ -1,0 +1,178 @@
+1.) File Handling :
+    > in java there are classes in libraries to work on files.
+    > import java.io.File;
+    > import java.io.FileWriter;
+    > import jaga.io.FileReader;
+
+    > File class
+        > constructor takes in the directory of the file along with the file name in the directory string only.
+        > File class has methods to perform action on existing file and even checking file data
+        > eg : file.exist() returns bool if file exists
+        > file.isFile() returns boolean to check if the file we selected is a textfile.
+        > file.delete() deletes file.
+        > file.createNewFile() : returns boolean if the file was created and false if the file is already present.
+            > file here is an object of file class. file.createNewFile() is better put in catch block of create File object as if the file is not present
+              a new file will be made at the address in the file object.
+        > file.getPath() gets the path that was given to the File object.
+        > file.getAbsolutePath() gets the expanded full path of the File object.
+
+    > FileWriter
+        > file writer constructor also takes inn the file directory as argument
+        > file writer is used to make changes to the file in question
+        > file writer is a resource which must be closed once its work is done since the changes made to file will note be made, unless we close the resource
+        > this is because file writer saves all the changes that need to be made in a file to a buffer and when the buffer is flushed or the object closed,
+          all the changes are made to the file.
+            > fWrite.write(<desired_text>) : this will override the file content.
+            > fWrite.append(<desired_text>) : this will append to the file.
+            > fWrite.flush() : flushes the content of the buffer and hence makes the changes to the file.
+            > fWrite.close() : flushes and also closes the resource.
+    > FileReader
+        > file reader is used for reading content of a file charecter by charecter.
+            > fRead.read() : reads the charecter and returns the numberic representation of the number.
+                also the next time fRead.read() is called, it will move to the next charecter in the file and return its ascii value.
+                fRead.read() will finally return -1 when it reaches end of file.
+              the number can be type casted to get the appropriate charecter.
+            > fRead.close() : frees the resources used by FileReader.
+
+              CODE :
+public class MainClass
+{
+	public static void main(String[] args) throws Exception
+	{
+		FileOperations obj = new FileOperations("C:\\ComputerScience\\JAVA\\epic.txt");
+		obj.overrideFile("All is WEll");
+		obj.fileWrite.close();
+		obj.readFile();
+		obj.fileRead.close();
+
+	}
+}
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+
+public class FileOperations
+{
+	File file ;
+	FileWriter fileWrite;
+	FileReader fileRead;
+	public FileOperations(String address)throws Exception
+	{
+		if(new File(address).createNewFile())
+		{
+			System.out.println("The file was Created !!\n");
+
+		}
+		else
+		{
+			System.out.println("The file was present !!\n");
+		}
+
+		this.file = new File(address);
+		this.fileRead = new FileReader(address);
+		this.fileWrite = new FileWriter(address);
+
+
+	}
+	public String getFilePath()// the path we passed as address
+	{
+		return file.getPath();
+	}
+	public String getAbsoluteFilePath()// for the expanded path
+	{
+		return file.getAbsolutePath();
+	}
+	public boolean checkIfFile()
+	{
+
+		return file.exists();
+
+	}
+	public void appendFile(String input)throws Exception
+	{
+		fileWrite.append(input);
+		fileWrite.flush();
+	}
+	public void overrideFile(String input)throws Exception
+	{
+		fileWrite.write(input);
+
+		fileWrite.flush();
+	}
+	public void readFile() throws IOException
+	{
+		int data = this.fileRead.read() ;
+		while(data != -1)
+		{
+			System.out.print((char)data);
+			data = this.fileRead.read() ;
+		}
+
+	}
+	public void deleteFile()
+	{
+		file.delete();
+	}
+	public void closeResources() throws IOException
+	{
+		fileRead.close();
+		fileWrite.close();
+	}
+}
+
+
+
+2.) EXCEPTIONS
+    Note most important role of finally block is :
+    > to close the resources that migh need closing
+    > We can create our own exception by creaeting a class and extending the Exception class.
+    > there is a mehthod in the parent class getMessage() this fetches the message.
+        > for setting what our exception object will return when getMessage() is called is determined by calling the super in the constructor of
+              our self made exception class and super(<Message_string>) this sets what will be returned by getMessage().
+    > also we can give a condition and use throws new <exception_class_name("exception message")> for calling our exception in case the condion is met.
+        > its better to just go to the vdeo example at 4:56 in the telusko video or the program in the folder.
+
+
+
+3.) Audio using File.
+    > usint the sampled package classes we can achieve audio features
+        this package has classess neede hence import javax.sound.sampled.*;
+    > but only .wav files can be played.
+    > we can select the wav audio file as an argument for File class.
+    > steps :
+        > first we make an File object pointing to the audio location.
+        > AudioInputStream object is made by passing the file in AudioSystem.getAudioInputStream(file)
+        > then a clip is made, using Clip clip = AudioSystem.getClip();
+        > AudioSystem class has static methods to get AudioInputStream and Clip.
+        > the AudioInputStream object is passed in clip.open() method.
+        > now the clip has a audio file and ready to play
+            > clip.start() : to start the audio
+            > clip.stop() : to pause the audio
+            > clip.setMicrosecondPosition(<position in ms>) : to set the position of the clip
+            > clip.close() : to close the clip playing once done.
+
+            import java.io.File;
+            import javax.sound.sampled.*;
+            import java.util.Scanner;
+
+            public class MainClass {
+
+            	public static void main(String[] args) throws Exception
+            	{
+            		Scanner scan = new Scanner(System.in);
+            		File file = new File("C:\\Users\\singh\\Downloads\\Formed By Glaciers.wav");
+            		AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            		Clip clip = AudioSystem.getClip();
+            		clip.open(audioStream);
+            		clip.start();                   			   // start clip
+            		scan.nextLine();
+            		clip.stop();                  				 // stops the clip
+            		clip.setMicrosecondPosition(0); 			// to reset to a position of clip
+            		clip.close();                			   // closes the resource
+            	}
+
+            }
+
+4.)

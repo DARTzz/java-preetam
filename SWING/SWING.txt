@@ -1,0 +1,401 @@
+import javax.swing.JFrame;
+
+this contains the swing components needed in the program
+
+1.) JFrame :
+    > THE NOOB WAY :
+    > jframe is the actual frame of our program.
+    > we setup a frame so that we can add various components to it.
+    > some features are :
+        > setTitle(<name_of_frame>) : this is the visible text of the frame
+        > setSize(<x>,<y>) : is used to set the size of the frame we are trying to set as by default our frame is zero size.
+        > setVisible(<Boolean>) : frame is made visible when true is passed in this field.
+        > setDefaultCloseOperation(JFrame.<fields>) : this si used to define what the close button will do. there are final static members of JFrame
+            used for this eg : JFrame.EXIT_ON_CLOSE will close the frame when we press cross.
+                               JFrame.DO_NOTHING_ON_CLOSE will ensure that pressin x does nothing.
+          NOTE : by default pressing x will close the frame but will keep in the background. by default its HIDE_ON_CLOSE
+        > frame.setResizable(<boolean>) : by default we can drag and resize our window, but passing false to this will make the frame non resizable
+          and fixed size.
+    > import javax.swing.ImageIcon;
+    > we can set the image of our frame.
+    > just copy the icon in the project directory(or any directory)
+    > give the directory of the image or if the image is in the project directory, just the image name.
+    > NOTE : the package must be in the package directory and not inside the package.
+    > create object of ImageIcon image = new ImageIcon(<image directory in string>);
+        > NOTE : image here is not an image but an ICON
+    > then
+        > frame.setIconImage(image.getImage()); since image is an icon and setIconImage needs an image as argument, we call getImage().
+          > frame.getContentPane().setBackground(Color.GREEN); : for setting the color of the frame.
+              > getContentPane() gets object of Content pane. Content pane is the pane visible in the frame.
+              > for this import java.awt.Color;
+          > we can even set it to a custom clor by passing : setBackground(new Color(<R>,<G>,<B>));
+              > R or G or B can range from 0 to 255.
+          > or se can pass hexadecimal values here : new Color(0x<6 digits of rgb >);
+
+    > THE PROFESSIONAL WAY :
+
+    > the professional way is to create a class of our own and extend JFrame class.
+    > then in the constructor of our class, setting all the attributes of our frame .
+    > then creating object of our own class to instanciate the frame.
+    > using this we can create methods to perform operation on our frame.
+
+2.) JLabel
+    > JLabel is a label component. A label can comprise of image , text or image and text together.
+    > we can pass a text in the constructor of the JLabel to achieve the text part in a label.
+        > while making our own class we can call the super.
+    > alternately we can use label.setText() to set the label text.
+    > label.setText();
+    > label.setIcon(<object of ImageIcon>) > since object of imageicon is an icon.
+    > By default, if a label has text and icon, the text will be on right of the image and this will follow default layout(later);
+
+    > label.setHorizontalTextPosition() > to set the position of the text WRT the image !!!
+        > JFrame has following to change the text position WRT image, eg. > JLabel.CENTER;JLabel.LEFT etc
+    > label.setVerticalTextPosition()// again for changing pos. WRT icon.
+
+    > label.setForeground(Color.RED) --> for setting the color of text
+    > label.setFont(<object of Font>) --> used for setting the font of label text.
+        > a font object can be made using new Font(<font_name>,<font style>,<Font size>) eg. Font("Calibri",Font.BOLD,30);
+    > label.setIconTextGap(<gap integer>) can help audgest the gap between font and the imgae, we can pass positive and negative both types of number.
+    > label.setBackground(Color.black) will set the color of the background of label, but there is a catch.
+        > by default the background is not opaque and for displaying the coclor of label background, we have to call
+        label.setOpaque(true);
+    > in the current layout, the size of the label occupies the maximum space and hence the whole frame.
+        > later we will strudy how to limit size of a label and position of label
+        > but for now in the frame we can set the frame.setLayout(null);// will study what it does
+        > after making the layout null, we need to set label bounds using :
+            label.setBounds(position x,position y,width,height);
+            >> hence we have to set the size and the position at which we need the label to be at.
+
+    > label is not just the image , there is some background also. We can check this by making a border and making it visible.
+    > Border border = BorderFactory.createLineBorder(<color of border>,<thickness>); // this is for creating a line border
+    > label.setBorder(<object of Border_Class>)
+        > this will show that label takes up a lot of space.
+
+    > we can manipulate the position of image and text inside of the label using some methods.
+    > label.setVerticalAllignment(JLabel.CENTER);
+    > label.setHorizontalAllignment(JLabel.CENTER);
+
+    > we can enable or close a label using setVisible(false);
+
+    > Frame has pack functions that are very useful.
+    > frame.pack() will automatically make the frame such as to accomodate the components .
+        > we can keep the default layout, and not mention frame size etc, and the frame will automaticaly be audgested according to the components.
+        > also add all the frame components before calling the pack() method.
+NOTE : For background less images. add transparent imgaes with no background.
+
+>> By default fram has Border layout and Panel has Flow Layout.
+>> we can make layout null and then we have to give our own Bounds to the panel using :
+    >> setBounds(y_coor,x_coor, length, breadth);
+
+3.) JPanel :
+    > JPanel is GUI component to divide the frame into parts.
+    > panel.setBackground(Color.red) for setting the color of the panel
+    > panel.setBounds(x coordinate , y coordinate , Length , Breadth);
+    > panel.setPreferredSize(new Dimension(100,100)) for setting size of a panel.
+    > JPanel use flow layout while the frame uses border layout.
+        > what we need to know about flow layout is that flow layout fills the component on the top row and centers them and keeps filling
+            the first row until its full and then moves to the second row.
+    > panel.setLayout(new BorderLayout()); : can be used to set the components in border layout.
+        > after border layout, vertical and horizontal alignment can be set to the components of the frame.
+        > setVerticalAlignment(JLabel.BOTTOM); and setHorizontalAlignment(JLabel.RIGHT)
+        > we can even use :
+        > setAlignmentX(x_coor) and setAlignmentY(y_coor) to set the x an y coordinates.
+        > we can use setbounds on border layout components also.
+NOTE : for the full Functionality of the aligning, set the layout to border layout instead of flow or null.
+
+4.) JButton :
+    > A Jbutton when pressed generates an event.
+    > we can setBounds() of a button when layout is null or border.
+    > setText() for setting the button text or we can pass in the constructor
+    > we can even add image icon to a button
+        > setIcon(image_icon) and the text and image will be inside a button like in a label
+        > function that we used in label to set the image and text position inside a button can be used.
+        > setHorizontalTextPosition(JButton.CENTER) and setVerticalTextPosition(JButton.BOTTOM)
+        > setFont(new Font("Comic Sans",Font.BOLD,25)); for setting the text font.
+        > setIconTextGap(-15); for icon and text gap in button
+        > button.setForground(Color.cyan) : for text color
+        > btton.setBackground(Color.LightGrey) : for background color
+        > setBorder(BorderFactory.createEtchedBorder()) : for giving button a border
+            > we can pass the arguments (border color, border shadow color) in EtchedBorder() since its 3d border.
+    > A button text has strange box around it which looks annoying
+        > setFocusable(false) for disabling that .
+    > addActionListener(component_in_which_button_present) add action listner takes object of components like frame of panel in which button is
+        attached
+    > actionPerformed(ActionEven e) this is default mehod of ActionListener which is evoked if a button is pressed and the event is
+        recieved as ActionEvent .
+        > e.getSource() returns object of button that generated the event.
+
+    > we can make button enabled or disabled using setEnabled(flase)
+        > when used smartly with action listner we can make logic that enable the button to be pressed once and then disable.
+
+5.) Border Layout Manager :
+    > a border layout is used to place components at 5 different locations in a component
+    > North,South,East,West and center
+
+>> When we dont mention the loaction of component by default it will be center and all the buttons will overlap each other with each button
+    the size of the complete frame.
+
+
+    > when we place panels on all 5 locations suppose in a frame, following observation is made :
+        > the center component changes size in proportion to the frame size
+            > by this we mean change in length of frame is proportional to change in length of center component
+              and change in breadth of frame is proportional to change in breadth of center.
+            > if window is minimised or maximised, the aspect ratio of center panel remains same.
+        > east and west are unaffected when width of frame is increased, but north and south exand on doing so.
+        > north and south are unaffectedwhen length of frame is increased but the other 2 expand.
+        > now the point is to understand, how the components in these frame will change on resizing.
+    > so north panel can be used for some type of title.
+    > the east west panels can be used for some kind of navigation bar(like in IDE)
+    > the center panel is used for main body.
+
+    > new BorderLayout(width,height) , we can give dimenstions of border we need in our layout by giving length and height
+        > the border will be color of the background.(since its more like space between components than a border line)
+    > frame.add(panel1, BorderLayout.NORTH) ; is used to add panel at the north.
+        > note that this north panel will have fixed height but will expand infinitely sideways.
+        > all the remaining space is taken by the Center Panel.
+        > on the corners north and south panels overlap the east and west panel.
+    > Adding 2 panel at the same side will cause overlap
+NOTE : note how the panel take up space in border layout, not caring about the dimensions we set they can expand infinitely based on where we add them.
+
+WATCH TUTORIAL TO UNDERSTAND BETTER since sizing is very complex
+
+6.) Flow Layout Manager :
+    > flow layout actually adds elements from top to bottom left to right format .
+    > it is somewhat like text formatting where paragraph text can be centered or left oriented or right oriented etc.
+        > frame.setLayout(new Flowlayout(FlowLayout.Leadin)) : component will be left aligned and upon expanding or contracting , will stick to left.
+        > FlowLayout.CENTER : components will be center alligned.
+        > FlowLayout.TRAILING : will be right Allignment.
+    > there are other constructors in FlowLayout for setting the gaps/spacing between the components.
+        > new FlowLayout(FlowLayout.CENTER, <Horizontal_Spacing>, <Vertical_Spacing>)
+            > setting the gap 0 will stick the components together.
+
+    > Panels By Default have flow layout.
+    > components move to the next row if there is no space left in current layout.
+
+7.) Grid Layout Manager :
+    > components are arranged in grid manner and each grid cell holds one component
+    > component takes up all the size of cell and all cells have same size
+    > now by default , all the cells will be put in a single row, but we can assign number of rows also.
+    > new GridLayout(<Rows>,<Columns>) we can set the number of rows and columns.
+    > if we add more elements than the rows and columns can suffice, it will automatically add more components.
+
+8.) JLayeredPane :
+    > this is similar to pane but these can be stacked one upon another.
+    > in a layeredPane we can add panels to layered pane.
+    > we can even set the bounds for LayeredPane and if left , will take the whole frame because of border layout.
+    > a layered pane can have 5 layers of Panel and each one has a name
+        > here are names from top layer to bottom layer :
+            > Drag
+            > PopUp
+            > Modal
+            > Palette
+            > Default
+
+    > we can select the layer we want to put out panel and hence decide the sequence of panels .
+        > layeredPane.add(label1, JLayeredPane.DEFAULT_LAYER) : will place the component in the bottom most layer.
+    > ALternatively we can select the layer by using number also but they must be wrapped into Integer class.
+        > layeredPane.add(label1, Integer.valueOf(0)) : will add to the bottom most layer.
+    > This is very important since good visual programs have layers of pannels for looking good.
+
+9.) JOptionPane :
+    > JOption pane is used for displaying a pop up message on the screen.
+    > there is a loarge variety in types of option panes.
+    > since joption pane components are onetime use, they are static in the JOptionPane class.
+    > Types of JOption Pane :
+        > JOptionPane.showMessageDialog(<Component to which attatched eg, frame, panel.>, <the message Dialog>, <Message box title>, <Text_Style>)
+        > the text style is in the JOptionPane class only :
+            > JOptionPane.PLAIN_MESSAGE
+            > JOptionPane.WARNING_MESSAGE
+            > JOptionPane.INFORMATION_MESSAGE
+            > JOptionPane.ERROR_MESSAGE
+            > JOptionPane.QUESTION_MESSAGE
+
+        > JOptionPane.showConfirmDialog(<Component to which attatched eg, frame, panel.>, <the message Dialog>, <Message box title>, <buttons needed>)
+            > this option pane has buttons Yes No Cancel
+                > buttons are added using method JOptionPane.YES_NO_CANCEL_OPTION in the last argument.
+            > based on what user pressed the method returns different values
+                >  cross button : -1
+                >  yes : 0
+                >  no : 1
+                >  cancel : 2
+            > and using these we can perform various operations.
+
+        > JOptionPane.showInputDialogue(<Text Message>);
+            > looks like showConfirmDialogue but has extra textfield.
+            > the method will also return a string which was entered in the field.
+
+        > JOptionPane.showOptionDialog(<component attatched to>,<Message>,<Title>,<buttons type>,<Message Styel>,icon,<array of string>,<default value>);
+            > JOptionPane.showOptionDialog(null,
+				        "HEllo Bruhh",
+				            "Title",
+				                JOptionPane.YES_NO_CANCEL_OPTION,
+				                    JOptionPane.WARNING_MESSAGE,
+				                        icon,
+				                            responses,
+				                                1);
+
+10.) JTextField :
+    > pretty easy :
+    field.setForeground(Color.GREEN);
+		field.setBackground(Color.BLACK);
+		field.setCaretColor(Color.GREEN);
+		field.setText("enter name");
+    field.setEditable(false);// disables textField
+
+11.) JCheckBox
+      box.setText("im not a robot");
+      box.isEnables(); returns boolean
+
+      checkbox can be changed to images if selected or deselected.
+
+      box.setIcon(imageIcon1);// this icon is there when button is disabled
+      checkBox.setSelectedIcon(imageIcon2);// this icon is there when checkbox is disabled
+
+note : difference between jcheckbox and jradiobutton is that multiple jcheckbox can be selecter while only one radiobutton is selected
+        from multiple radiobuttons
+
+12.) JRadioButton :
+      after creating radio buttons they are to be put in ButtonGroup
+      in a button group we add the radio button and then only one button will be selected at a time.
+      we can add icon to radio button also.
+      also we can use setSelectedIcon in radioButtons
+
+>> we cannot work using primitive data types in swing library, we need to use wrapper calsses.
+
+13.) JComboBox :
+      > dropdown list baby
+      > in JComboBox
+      > combobox constructor takes inn an array or collection of objects and those objects become the available options in the dropdown menu.
+          > eg. if we pass an array of String, the opetion will the elements of the array.
+          > we cannot pass array of primitive datataypes.
+      > Selecting an option in combobox, also generates ActionEvent.
+      > comboBox.getSelectedItem() returns the item selected in the combobox.
+      > comboBox.getSelectedIndex() gets the index of the option we selected.
+      > comboBox.setEditable(true);// we can type inn what we want.
+      > comboBox.getItemCount(); // returns the number of items.
+      > comboBox.addItem(<element_to_be_added>).
+      > comboBox.insertItemAt(<item object>,<index>)
+      > comboBox.setSelectedIndex(0)// default selected Index.
+      > comboBox.removeItem("cat");
+      > comboBox.removeItemAt(0);// index zero item gets removed.
+      > comboBox.removeAllItems();
+
+14.) JSlider :
+    > slide, weeee
+    > Slider needs Change Listener(stateChanged method is to be defined) and generates a ChangeEvent
+    > JSlider can take values in constructor.
+        > JSlider(<starting number>,<ending number>,<default starting Point>)
+    > slider.setPreferredSize(new Dimension(400,200)). to set the slider dimentions.
+    > slider.setPaintTicks(true);// makes division on slider
+    > slider.setMinorTickSpacing(<space size>);// set number of units after one tick is there eg. if 10, each tick will occure after 10 units.
+    > slider.setPaintTrack(true); // the bigger divisions
+    > slider.setMajorTickSpacing(<space size>) ; // set the gap in major tick
+    > slider.setPaintLables(true); // sets number on the major ticks
+    > slider.setFont(new Font("MV Boli",Font.PLAIN.15))/
+    > slider.setOrientation(SwingConstants.VERTICAL);// make the slider vertical.
+    > slider.addChangeListener(this);
+    > slider.getValue() will get the value of slider at some instance.
+
+15.) JProgressBar ;
+    > for showing the user that something is progressing.
+    > Bar.setValue(0); // sets initial value to 0
+    > bar.setBounds(0,0,240,50); // we can set bounds of the progres bar
+    > frame.add(bar);
+    > bar.setStringPainted(true);// for displaying a percentage on the progress bar.
+
+    > we can use a loop to gradually increment the progress bar value, and in the loop use Thread.sleep(<milliseconds>);
+      this will make the process sleep for a certain time and then continue progressing the progress bar.
+      we use this because using a loop, the progress bar will fill up instantly thats how fast our pc are.
+      Thread.sleep() throws exception InterruptedException e.
+
+    > bar.setString("Done");
+    > bar.setFont(new Font("MV Boli",Font.BOLD,25));
+    > bar.setForground(Color.RED);// set the fill color
+    > bar.setBackground(Color.BLACK);// set the color of the background bar
+    > the constructor of JProgressBar takes 2 arguments : minimum value and max value.JProgressBar(<min>,<max>)
+
+16.) JMenuBar :
+    > we dont add a nenubar to a frame, instead we pass the object of our menubar in frame.setMenuBar(menuBar);
+    > we make object of JMenu to add to MenuBar
+        > JMenu fileMenu = new JMenu(<name of menu>);
+    > then we add menuBar.add(fileMenu);
+
+    > JMenuItems are to be put in JMenu.
+    > JMenuItem loadItem = new JMenuItem(<name of menuitem>);
+    > fileMenu.add(loadItem);
+    >> we can set actionlistener to JMenuItem objects.
+    > we can add shortcut to menu items
+        > loadItem.setMnemonic(KeyEvent.VK_L); // for setting l as shortcut
+        > mow just press the Menu and l will be underlined in load and pressing l will cause loadItem event triggered.
+
+    > we can even set shortcuts for menus also :
+        > but to call the memnu items using shortcut, the shortcut key must be pressed with alt.
+        > fileMenu.setMnemonic(KeyEvent.VK_F);// pressing alt+f opens file menu
+
+    > icons can be set for each menuitem using setIcon
+
+17.) JFileChooser :
+    > fileChooser.showOpenDialog(null); // select file to open.
+    > the showOpenDialog() returns an integer value :
+        > 0 if file was selected and 1 if file was not selected but the chooser was closed.
+        > 1 comes when cross is pressed or cancel is pressed.
+    > we can check if the file was selected using :
+        if(fileChooser.showOpenDialog(null) == 0)
+        or
+        if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+
+        if the file was choosen by user, we can store the chosen file in a File object
+        File file = new File(fileChooser.getSelectedFile().getAbsolutePath()); // since File takes path of a file as argument
+        using SOP to print file actually prints the file path.
+
+    > fileChooser.showSaveDialog(null);
+    > this will save a file and the changes made to fileChooser
+    > note that file chooser is just for interface and getting the file address, once we get the file address we can use File class
+      to make changes to the file.
+
+    > fileChooser.setCurrentDirectory(new File(<directory>));// sets the default directory where file chooser opens.
+
+18.) JColorChooser :
+    > lets user select a color
+    > Color color = jColorChooser.showDialog(null,"Pick a color",Color.black);
+        > arguments are parent component , colorchooser window name, default color.
+
+19.) KeyListener
+    >  we can add KeyListener interface to our class and it will have 3 methods :
+      > keyTyped(KeyEvent e)
+          > ivoked when a key is typed,(uses KeyChar, and returns a char output of the key pressed)
+      > keyPressed(KeyEvent e)
+          > invoked when a physical key is pressed down. Uses KeyCode and returns int output(each key is given a keycode)
+      > keyReleased(KeyEvent e)
+          > whenever a button is released
+      > pressing a key generates KeyEvent
+
+      > we can add key listener to a frame using addKeyListener(this);
+
+      > e.getKeyChar() gets key charecter
+      > e.getKeyCode() gets key code
+>> note that keys like shift dont have any keycharecter but has a keycode
+
+20.) MouseListener :
+    > there are various methods to be inherited in mouse listener
+
+21.) make a frame take full screen in swing :
+    > private void makeFrameFullSize(JFrame aFrame)
+    {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        aFrame.setSize(screenSize.width, screenSize.height);
+    }
+
+    or
+
+    frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    frame.setUndecorated(true);
+    frame.setVisible(true);
+
+22.) to insert line break in JLabel :
+    use html code : eg : upLabel = new JLabel("<html>Medical<br>Central<br>India</html>");
+
+23.) to make a transparent button :
+button. setOpaque(false);
+button. setContentAreaFilled(false);
+button. setBorderPainted(false);
